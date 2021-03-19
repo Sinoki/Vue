@@ -1,10 +1,43 @@
 <template>
-  <div id="nav">
+  <div>
+    Hello
+
+    <options />
+    <options />
+    <options />
+
+    <composition-api />
+    <composition-api />
+    <composition-api />
+
+    <!-- <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />
+    <asd />-->
+  </div>
+  <!-- <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div>
-  <router-view/>
+  <router-view/> -->
 </template>
+
+<script>
+// import Asd from "@/components/Asd.vue";
+import Options from '@/components/Options.vue';
+import CompositionApi from '@/components/CompositionApi.vue';
+
+export default {
+  // components: { Asd },
+  components: { Options, CompositionApi },
+};
+</script>
 
 <style lang="scss">
 #app {
