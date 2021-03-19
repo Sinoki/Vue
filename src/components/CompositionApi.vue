@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="mt">Sou composition</div> -->
   <div class="mt">
-      <div>Sou composition: {{a}}</div>
+      <div>{{c}}: {{a}}</div>
       <button @click="inc">++</button>
       </div>
 </template>
@@ -10,13 +10,19 @@
 import { ref } from 'vue';
 
 export default {
-  setup() {
+
+  props: {
+    c: { type: String, defualt: null },
+  },
+
+  setup(props, { emit }) {
     const a = ref(0);
-    console.log('sou um comp composition');
 
     const inc = () => {
-      console.log('vamos inc', a);
+      console.log('vamos inc');
       a.value += 1;
+
+      emit('inc');
     };
     return { a, inc };
   },

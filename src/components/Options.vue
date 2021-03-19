@@ -1,6 +1,8 @@
 <template>
 <div style="margin-top: 50px">
-  <div>Sou o ASD: {{a}} </div>
+  <div>{{ c }}: {{ a }} </div>
+
+  <div>total dentro do child: {{total}}</div>
 
   <!-- <button @click="a++">++</button> -->
   <button @click="inc">++</button>
@@ -9,6 +11,12 @@
 
 <script>
 export default {
+
+  props: {
+    c: { type: String, defualt: null },
+    total: { type: Number, defualt: 0 },
+  },
+
   data() {
     return {
       // a: 'sou o a',
@@ -26,6 +34,8 @@ export default {
     // ---console.log('Depois', this.a);
       console.log('Inc', this.a);
       this.a += 1;
+
+      this.$emit('inc');
     },
   },
 };
