@@ -7,6 +7,9 @@
     Pokemons:
     <div v-if="listOfCards.length" style="border: 1px solid black">
       <div v-for="card in listOfCards" :key="card.id" class="cards">
+                   <div class="pictures">
+    <img src="../assets/pokemon/pikachu.png">
+  </div>
         {{ card }}
       </div>
     </div>
