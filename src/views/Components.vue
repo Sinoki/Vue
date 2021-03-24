@@ -5,6 +5,7 @@
     {{ listOfCards.length }}
 
     Pokemons:
+
     <div v-if="listOfCards.length" style="border: 1px solid black">
       <div v-for="card in listOfCards" :key="card.id" class="cards">
                    <div class="pictures">
@@ -12,6 +13,7 @@
   </div>
         {{ card }}
       </div>
+
     </div>
 
     <div style="margin-top: 100px">Total: {{ total }}</div>

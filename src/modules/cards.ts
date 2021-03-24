@@ -296,14 +296,14 @@ const actions = {
     console.log('Vamos carregar os cards');
 
     setTimeout(() => {
-      console.log('depois de 10s');
+      console.log('depois de 2s');
       mockData.forEach((card) => {
         console.log(card);
         mutations.processCard(card);
       });
 
       mutations.setBusy(false);
-    }, 5000);
+    }, 2000);
   },
 };
 // ---------------------------------------------------------//
