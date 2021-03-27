@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div>Username</div>
+    <div><br>Username</div>
     <input
       v-model="username"
       ref="usernameEl"
@@ -8,7 +8,7 @@
       @keyup="usernameHandler"
     />
 
-    <div>Password</div>
+    <div><br>Password</div>
     <input
       v-model="password"
       ref="passwordEl"
@@ -17,16 +17,17 @@
     />
 
     <div>
-      <button @click="login">Login</button>
+      <br><button @click="login">Login</button>
     </div>
 
     <div>
-      Não tem conta ? <router-link to="/signup">Cadastre-se aqui</router-link>
+      <br>Não tem conta? <router-link to="/signup">Cadastre-se aqui</router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import useAuth from '@/modules/auth';
 import {
   defineComponent, reactive, ref, toRefs,
 } from 'vue';
@@ -35,6 +36,7 @@ export default defineComponent({
   components: {},
 
   setup() {
+    const auth = useAuth();
     const usernameEl = ref();
     const passwordEl = ref();
     const state = reactive({
@@ -42,8 +44,17 @@ export default defineComponent({
       password: '',
     });
 
-    const login = () => {
+    const login = async () => {
       console.log('vamos fazer o login', state.username, state.password);
+      if (state.username && state.password) {
+        const res = await auth.actions.login(state.username, state.password);
+
+        console.log('res do login', res);
+        if (res.status === 'WRONG_USER') {
+          // seta uma msg de erro
+          // console.log('ERROR');
+        }
+      }
     };
 
     const usernameHandler = (e: KeyboardEvent) => {
@@ -73,5 +84,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .login {
+  color: magenta;
 }
 </style>
