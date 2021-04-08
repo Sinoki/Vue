@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <div><br>Username</div>
+  <div class="menuLogin">
+    <div class="username">Username</div>
     <input
       v-model="username"
       ref="usernameEl"
@@ -8,7 +8,7 @@
       @keyup="usernameHandler"
     />
 
-    <div><br>Password</div>
+    <div class="password">Password</div>
     <input
       v-model="password"
       ref="passwordEl"
@@ -16,12 +16,12 @@
       type="password"
     />
 
-    <div>
-      <br><button @click="login">Login</button>
+    <div class="btnLogin">
+      <button @click="login">Login</button>
     </div>
 
-    <div>
-      <br>Não tem conta? <router-link to="/signup">Cadastre-se aqui</router-link>
+    <div class="signup">
+      Não tem conta? <router-link to="/signup">Cadastre-se aqui</router-link>
     </div>
   </div>
 </template>
@@ -83,7 +83,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.login {
+.menuLogin {
   color: magenta;
+}
+.username {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.password {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.btnLogin {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.signup {
+  margin-top: 20px;
 }
 </style>
