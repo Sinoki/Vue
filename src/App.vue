@@ -14,6 +14,8 @@ export default defineComponent({
   setup() {
     const auth = useAuth();
 
+    auth.actions.loadUserData();
+
     console.log(auth);
 
     if (auth.state.token) {

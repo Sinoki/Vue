@@ -1,5 +1,7 @@
-import { readonly } from 'vue';
-import { Login } from '@/mockServer/server';
+import { readonly, reactive } from 'vue';
+import { Login, Signup } from '@/mockServer/server';
+
+const STORAGE_KEY = 'Marketplace_vue_3_1';
 
 interface State {
   id: number;
@@ -8,12 +10,12 @@ interface State {
   token: string;
 }
 
-const state: State = {
+const state: State = reactive({
   id: 0,
   name: '',
   username: '',
   token: '',
-};
+});
 
 const mutations = {
   login(obj: any) {
@@ -25,26 +27,41 @@ const mutations = {
 };
 
 const actions = {
-  async login(username: string, password: string): Promise<any> {
+  loadUserData() {
+    const item = window.localStorage.getItem(STORAGE_KEY);
+
+    if (item) {
+      mutations.login(JSON.parse(item));
+    }
+  },
+
+  logout() {
+    window.localStorage.removeItem(STORAGE_KEY);
+    mutations.login({});
+  },
+
+  async login(username: string, password: string) {
     console.log('sou action, vamos logar', username, password);
 
     const res = await Login(username, password);
-
     if (res.status === 'OK') {
       mutations.login(res.result);
-    }
 
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(res.result));
+    }
     return res;
   },
 
-  login2(username: string, password: string) {
-    return new Promise((resolve) => {
-      console.log('sou action, vamos logar', username, password);
+  async signup(name:string, username:string, password:string) {
+    console.log('sou action, vamos cadastrar', name, username, password);
 
-      setTimeout(() => {
-        resolve('hello');
-      }, 3000);
-    });
+    const res = await Signup(name, username, password);
+
+    if (res.status === 'OK') {
+      mutations.login(res.result);
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(res.result));
+    }
+    return res;
   },
 };
 
