@@ -52,7 +52,7 @@ const actions = {
     return res;
   },
 
-  async signup(name:string, username:string, password:string) {
+  async signup(name: string, username: string, password: string) {
     console.log('sou action, vamos cadastrar', name, username, password);
 
     const res = await Signup(name, username, password);

@@ -7,21 +7,24 @@
 import { defineComponent } from 'vue';
 import Header from '@/components/Header.vue';
 import useAuth from './modules/auth';
+import useMe from './modules/me';
 
 export default defineComponent({
   components: { Header },
 
   setup() {
     const auth = useAuth();
+    const me = useMe();
 
     auth.actions.loadUserData();
 
-    console.log(auth);
-
     if (auth.state.token) {
-      console.log('Esta logado');
-    } else {
-      console.log('Nao esta logado');
+      me.actions.getMe().then((res) => {
+        console.log('App.vue', res);
+        if (!res) {
+          auth.actions.logout();
+        }
+      });
     }
 
     return {};
