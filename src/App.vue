@@ -50,4 +50,12 @@ export default defineComponent({
     }
   }
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
 </style>
