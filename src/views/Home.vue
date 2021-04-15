@@ -8,6 +8,8 @@
       <div v-for="pokemon in list" :key="pokemon.id" class="home-card">
         <img :src="pokemon.sprites.frontDefault" />
         <div>{{ pokemon.id }} - {{ pokemon.name }}</div>
+
+        <button @click="buyHandler(pokemon.id)">Buy</button>
       </div>
     </div>
 
@@ -33,11 +35,15 @@ export default defineComponent({
       cards.actions.loadMore();
     };
 
+    const buyHandler = (id: number) => {
+      console.log('vamos comprar', id);
+    };
     cards.actions.loadCards();
 
     return {
       list,
       loadMoreHandler,
+      buyHandler,
     };
   },
 });
