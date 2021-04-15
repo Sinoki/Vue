@@ -7,7 +7,8 @@
       Price: R$ <span>{{ card.price }}</span>
     </div>
 
-    <btn v-if="!isCart" @click="$emit('on-buy', card)">Buy</btn>
+    <btn v-if="isMine" @click="$emit('on-sell')">Sell</btn>
+    <btn v-else-if="!isCart" @click="$emit('on-buy', card)">Buy</btn>
     <btn v-else @click="$emit('on-remove')">Remove</btn>
   </div>
 </template>
@@ -22,6 +23,7 @@ export default defineComponent({
   props: {
     card: { type: Object, required: true },
     isCart: { type: Boolean, default: false },
+    isMine: { type: Boolean, default: false },
   },
 
   setup() {

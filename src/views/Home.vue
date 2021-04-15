@@ -2,15 +2,26 @@
   <div class="home">
     Bom dia usuario, seja bem vindo a super loja de cards Pokemon
 
-    <div>lista dos pokemons</div>
-
-    <div class="home-card-container flex flex-wrap">
-      <div v-for="card in list" :key="card.id">
-        <card-component :card="card" @on-buy="buyHandler(card)" />
+    <div style="margin-top: 30px">
+      <div>lista dos seus pokemons</div>
+      <div class="home-card-container flex flex-wrap">
+        <div v-for="card in myList" :key="card.id">
+          <card-component :card="card" @on-sell="sellHandler(card)" isMine />
+        </div>
       </div>
     </div>
 
-    <btn @click="loadMoreHandler">Carregar mais</btn>
+    <div style="margin-top: 30px">
+      <div>lista dos pokemons</div>
+
+      <div class="home-card-container flex flex-wrap">
+        <div v-for="card in list" :key="card.id">
+          <card-component :card="card" @on-buy="buyHandler(card)" />
+        </div>
+      </div>
+
+      <btn @click="loadMoreHandler">Carregar mais</btn>
+    </div>
   </div>
 </template>
 
@@ -30,22 +41,29 @@ export default defineComponent({
     const me = useMe();
 
     const list = cards.getters.sortedList();
+    const myList = me.getters.sortedList();
 
     const loadMoreHandler = () => {
       cards.actions.loadMore();
     };
 
     const buyHandler = (card: Card) => {
-      console.log('vamos comprar', card);
       me.mutations.addCardToCart(card);
+    };
+
+    const sellHandler = (card: Card) => {
+      console.log('sell', card);
+      me.actions.sell(card);
     };
 
     cards.actions.loadCards();
 
     return {
       list,
+      myList,
       loadMoreHandler,
       buyHandler,
+      sellHandler,
     };
   },
 });
