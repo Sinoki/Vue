@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { reactive, readonly } from 'vue';
+import { computed, reactive, readonly } from 'vue';
 
 // ------------------Interfaces--------------------------------//
 
@@ -10,6 +10,7 @@ export interface Card {
   id: number;
   name: string;
   sprites: Sprite;
+  price: number;
   abilities?: [];
   baseExperience?: number;
   forms?: [];
@@ -55,6 +56,7 @@ const mutations = {
     const newCard: Card = {
       id: card.id,
       name: card.name,
+      price: card.price,
       sprites: {
         frontDefault: card.sprites.front_default,
       },
@@ -74,7 +76,15 @@ const mutations = {
     state.nextUrl = url;
   },
 };
-// -------------------------------------------------------//
+// ----------------------------------------------------------//
+
+// ------------------- Actions ------------------------------//
+const getters = {
+  sortedList() {
+    return computed(() => state.list.sort((a, b) => a.id - b.id));
+  },
+};
+// ----------------------------------------------------------//
 
 // ------------------- Actions ------------------------------//
 const actions = {
@@ -103,6 +113,7 @@ const actions = {
       // console.log(pokemon);
       axios.get(pokemon.url).then((p) => {
         const card = p.data;
+        card.price = Math.floor(Math.random() * 100);
         mutations.processCard(card);
       });
     });
@@ -115,5 +126,6 @@ export default function useCards() {
     state,
     actions,
     mutations,
+    getters,
   });
 }
