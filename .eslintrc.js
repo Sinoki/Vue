@@ -17,5 +17,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'no-plusplus': 'off',
+    'no-underscore-dangle': 'off',
+    'no-await-in-loop': 'off',
   },
 };
