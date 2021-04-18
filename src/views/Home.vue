@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    Bom dia usuario, seja bem vindo a super loja de cards Pokemon
-
+    <div class="welcome">
+      Bom dia, boa tarde, boa noite, depende de onde você está 😃 seja bem vindo
+      ao markeplace Sinoki Card Games 🚀
+    </div>
     <div style="margin-top: 30px">
       <div>lista dos seus pokemons</div>
       <div class="home-card-container flex flex-wrap">
@@ -23,6 +25,7 @@
       <btn @click="loadMoreHandler">Carregar mais</btn>
     </div>
   </div>
+  <div class="footer">2021 ♥ Desenvolvimento: Sinoki Card Games ®.</div>
 </template>
 
 <script lang="ts">
@@ -70,9 +73,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.welcome {
+  font-family: "Ink Free";
+  font-weight: bold;
+  font-size: 27px;
+  color: #f9105a;
+}
 .home-card-container {
   border: 1px solid black;
   max-height: 40vw;
   overflow-y: auto;
+}
+.footer {
+  background: lightcoral;
+  height: 50px;
 }
 </style>
