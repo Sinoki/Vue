@@ -1,12 +1,8 @@
 <template>
   <div class="login">
-    <div>Name</div>
-    <input
-      v-model="name"
-      type="text"
-      @keyup="nameHandler"
-    />
-    <div>Username</div>
+    <div class="name">Name</div>
+    <input v-model="name" type="text" @keyup="nameHandler" />
+    <div class="username">Username</div>
     <input
       v-model="username"
       ref="usernameEl"
@@ -17,7 +13,7 @@
       {{ error.msg }}
     </div>
 
-    <div>Password</div>
+    <div class="password">Password</div>
     <input
       v-model="password1"
       ref="password1El"
@@ -25,7 +21,7 @@
       type="password"
     />
 
-    <div>Conf. Password</div>
+    <div class="conf">Conf. Password</div>
     <input
       v-model="password2"
       ref="password2El"
@@ -36,11 +32,13 @@
       {{ error.msg }}
     </div>
 
-    <div>
+    <div class="btn">
       <button @click="signup">Signup</button>
     </div>
 
-    <div>Já tem conta ? <router-link to="/login">Login</router-link></div>
+    <div class="conta">
+      Já tem conta ? <router-link to="/login">Login</router-link>
+    </div>
   </div>
 </template>
 
@@ -89,11 +87,15 @@ export default defineComponent({
       }
 
       console.log('vamos fazer o signup', state.username, state.password1);
-      const res = await auth.actions.signup(state.name, state.username, state.password1);
+      const res = await auth.actions.signup(
+        state.name,
+        state.username,
+        state.password1,
+      );
       if (res.status === 'OK') {
         console.log('ok');
       }
-    // verifica se tem erro e mostra na tela
+      // verifica se tem erro e mostra na tela
     };
 
     const nameHandler = (e: KeyboardEvent) => {
@@ -135,6 +137,28 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.login {
+  background: lightgreen;
+  color: darkmagenta;
+}
+.name {
+  margin-top: 10px;
+}
+.username {
+  margin-top: 10px;
+}
+.password {
+  margin-top: 10px;
+}
+.conf {
+  margin-top: 10px;
+}
+.btn {
+  margin-top: 10px;
+}
+.conta {
+  margin-top: 10px;
+}
 .signup-error {
   color: red;
 }

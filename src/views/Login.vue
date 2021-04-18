@@ -84,7 +84,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .menuLogin {
-  color: magenta;
+  background: lightgreen;
+  color: darkmagenta;
+  height: 100%;
+  width: 100%;
 }
 .username {
   margin-top: 20px;

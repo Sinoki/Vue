@@ -1,4 +1,7 @@
 <template>
+<div class="title">
+Sinoki Card Games
+</div>
   <div class="header">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
@@ -56,10 +59,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.header {
-  border: 1px solid black;
+.title:hover {
+color: white;
 }
-
+.title {
+  font-family: 'Comic Sans MS';
+  color: black;
+  font-size: 30px;
+  background: lightcoral;
+}
+.header {
+  background: lightcoral;
+  font-size: 20px;
+  border: 1px solid;
+}
 .header-balance {
   margin-left: 20px;
 }
