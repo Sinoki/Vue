@@ -6,6 +6,7 @@ const user: { [key: string]: any } = {
   status: 'Ok',
   token: '',
   balance: 0,
+  cards: [],
 };
 
 const data = window.localStorage.getItem('tpm_marketplace_vue31');
@@ -65,5 +66,42 @@ export const getMe = async () => ({
     name: user.name,
     username: user.username,
     balance: user.balance,
+    cards: user.cards,
   },
 });
+
+export const buy = async (body: any) => {
+  console.log('comprou', body);
+  body.cards.forEach((card: any) => {
+    user.cards.push(card);
+    user.balance -= card.price;
+  });
+
+  window.localStorage.setItem('tpm_marketplace_vue31', JSON.stringify(user));
+
+  return {
+    status: 'OK',
+    result: {
+      balance: user.balance,
+    },
+  };
+};
+
+export const sell = async (body: any) => {
+  console.log(JSON.stringify(user.cards));
+
+  const idx = user.cards.findIndex((x: any) => x.id === body.card_id && x.price === body.price);
+
+  user.balance += body.price;
+
+  user.cards.splice(idx, 1);
+
+  window.localStorage.setItem('tpm_marketplace_vue31', JSON.stringify(user));
+
+  return {
+    status: 'OK',
+    result: {
+      balance: user.balance,
+    },
+  };
+};
